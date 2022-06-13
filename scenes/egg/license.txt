@@ -1,0 +1,3 @@
+License for models of Egg scene.
+Source: https://benedikt-bitterli.me/resources/
+Credits: Benedikt Bitterli (licensed under CC0)

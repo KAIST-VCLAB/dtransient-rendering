@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<scene version="0.5.0">
+	<integrator type="bdpt">
+		<integer name="maxDepth" value="6"/>
+	</integrator>
+
+	<sensor type="perspective">
+		<float name="fov" value="10"/>
+		<string name="fovAxis" value="x"/>
+		<transform name="toWorld">
+			<lookat target="-237.670547 277.404755 -20" origin="1200 1200 -20" up="0.0, 1.0, 0.0"/>
+		</transform>
+
+		<sampler type="independent">
+			<integer name="sampleCount" value="512"/>
+		</sampler>
+
+		<film type="hdrfilm">
+			<boolean name="banner" value="false"/>
+			<integer name="height" value="256"/>
+			<integer name="width" value="256"/>
+
+			<rfilter type="box"/>
+			
+			<!--{duration}: number of transient frames-->
+			<integer name="duration" value="1000"/>
+			<!--{tresolution}: the sensor sensitivity function w.r.t. time of the (i+1)-th transient frame is obtained by translating that of the i-th frame by {tresolution}ns-->
+			<float name="tresolution" value="20.0"/>
+			<!--{tstart}: the sensor sensitivity function w.r.t. time of 0-th transient frame starts at t={tstart}ns-->
+			<float name="tstart" value="6000.0"/>
+			<!--{tresolution_light}: Light sources in the scene is turned on at t=0 and turned off at t={tresolution_light}ns-->
+			<float name="tresolution_light" value="20.0"/>
+		</film>
+	</sensor>
+
+	<bsdf type="phong" id="Glass">
+		<spectrum name="diffuseReflectance" value="0.1, 0.1, 0.1"/>
+		<spectrum name="specularReflectance" value="1.0, 1.0, 1.0"/>
+		<spectrum name="exponent" value="10.0"/>
+	</bsdf>
+
+	<bsdf type="diffuse" id="light">
+		<spectrum name="reflectance" value="1.0, 1.0, 1.0"/>
+	</bsdf>
+
+	<bsdf type="diffuse" id="floor">
+		<spectrum name="reflectance" value="0.7, 0.7, 0.7"/>
+	</bsdf>
+
+	<bsdf type="diffuse" id="tree2">
+		<spectrum name="reflectance" value="0.7, 0.3, 0.2"/>
+	</bsdf>
+
+	<shape type="rectangle" id="emitter_right">
+		<transform name="toWorld">
+			<matrix value="-0.0101082 0.067068 0.00138972 -2.69082 -0.0610016 -0.0070995 -0.00842772 5.10417 -0.0282857 -0.00865658 0.0176788 -3.77057 0 0 0 1"/>
+			<scale x="100" y="100" z="100"/>
+			<!-- <translate x='50' y='-80'/> -->
+		</transform>
+
+		<ref id="floor"/>
+
+		<emitter type="area">
+			<rgb name="radiance" value="12048.2, 8605.84, 6196.21"/>
+		</emitter>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/lightcase_right_2_noN.obj"/>
+		<boolean name="faceNormals" value="true"/>
+		<transform name="toWorld">
+			<!-- <translate x='50' y='-80'/> -->
+		</transform>
+		<ref id="light"/>
+	</shape>
+
+	<shape type="rectangle" id="emitter_left">
+		<transform name="toWorld">
+			<matrix value="-1.20536e-008 0.275755 1.20536e-008 -2.48161 0 -6.64767e-009 0.152081 6 0.275754 1.20536e-008 5.2688e-016 2.5894 0 0 0 1"/>
+			<scale x="100" y="100" z="100"/>
+		</transform>
+
+		<ref id="light"/>
+
+		<emitter type="area">
+			<rgb name="radiance" value="523.258, 523.258, 523.258"/>
+		</emitter>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/lightcase_left_0.obj"/>
+
+		<ref id="light"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/lightcase_left_1.obj"/>
+
+		<ref id="light"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/lightcase_left_2.obj"/>
+
+		<ref id="light"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/glassball.obj"/>
+
+		<ref id="Glass"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/table_leg_1.obj"/>
+
+		<ref id="floor"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/table_leg_2.obj"/>
+
+		<ref id="floor"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/table_leg_3.obj"/>
+
+		<ref id="floor"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/table_leg_4.obj"/>
+
+		<ref id="floor"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/table.obj"/>
+		<boolean name="faceNormals" value="true"/>
+
+		<ref id="tree2"/>
+	</shape>
+
+	<shape type="obj">
+		<string name="filename" value="models/surroundings.obj"/>
+		<boolean name="faceNormals" value="true"/>
+
+		<ref id="floor"/>
+	</shape>
+</scene>
